@@ -28,33 +28,47 @@ namespace Maydear
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>();
             if (headers != null && headers.Count > 0)
             {
-                foreach (var item in headers)
+                foreach (KeyValuePair<string, string> item in headers)
                 {
                     if (client.DefaultRequestHeaders.Contains(item.Key))
+                    {
                         client.DefaultRequestHeaders.Remove(item.Key);
+                    }
+
                     client.DefaultRequestHeaders.Add(item.Key, item.Value);
                 }
             }
             client.GetAsync(requestUri).ContinueWith((requestTask) =>
             {
-                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs))
+                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs, cancellationToken))
                 {
                     return;
                 }
                 try
                 {
-                    var result = requestTask.Result;
+                    HttpResponseMessage result = requestTask.Result;
 
                     if (result.IsSuccessStatusCode)
                     {
                         result.Content.ReadAsStringAsync().ContinueWith((resultTask) =>
                         {
-                            var text = resultTask.Result;
-                            if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs))
+                            string text = resultTask.Result;
+                            if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs, cancellationToken))
+                            {
                                 return;
+                            }
+
                             try
                             {
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                if (packageObject.StatusCode == 2000)
+                                {
+                                    tcs.SetResult(packageObject.Body);
+                                }
+                                else
+                                {
+                                    tcs.SetException(new Exceptions.StatusCodeException(packageObject.StatusCode, packageObject.Notification));
+                                }
                             }
                             catch (Exception deserializeException)
                             {
@@ -90,33 +104,47 @@ namespace Maydear
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>();
             if (headers != null && headers.Count > 0)
             {
-                foreach (var item in headers)
+                foreach (KeyValuePair<string, string> item in headers)
                 {
                     if (client.DefaultRequestHeaders.Contains(item.Key))
+                    {
                         client.DefaultRequestHeaders.Remove(item.Key);
+                    }
+
                     client.DefaultRequestHeaders.Add(item.Key, item.Value);
                 }
 
             }
             client.DeleteAsync(requestUri).ContinueWith((requestTask) =>
             {
-                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs))
+                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs, cancellationToken))
                 {
                     return;
                 }
                 try
                 {
-                    var result = requestTask.Result;
+                    HttpResponseMessage result = requestTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
                         result.Content.ReadAsStringAsync().ContinueWith((resultTask) =>
                         {
-                            var text = resultTask.Result;
-                            if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs))
+                            string text = resultTask.Result;
+                            if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs, cancellationToken))
+                            {
                                 return;
+                            }
+
                             try
                             {
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                if (packageObject.StatusCode == 2000)
+                                {
+                                    tcs.SetResult(packageObject.Body);
+                                }
+                                else
+                                {
+                                    tcs.SetException(new Exceptions.StatusCodeException(packageObject.StatusCode, packageObject.Notification));
+                                }
                             }
                             catch (Exception deserializeException)
                             {
@@ -155,30 +183,47 @@ namespace Maydear
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>();
             if (headers != null && headers.Count > 0)
             {
-                foreach (var item in headers)
+                foreach (KeyValuePair<string, string> item in headers)
                 {
                     if (client.DefaultRequestHeaders.Contains(item.Key))
+                    {
                         client.DefaultRequestHeaders.Remove(item.Key);
+                    }
+
                     client.DefaultRequestHeaders.Add(item.Key, item.Value);
                 }
             }
             client.PostAsync(requestUri, content).ContinueWith((requestTask) =>
             {
-                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs))
+                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs, cancellationToken))
+                {
                     return;
+                }
+
                 try
                 {
-                    var result = requestTask.Result;
+                    HttpResponseMessage result = requestTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
                         result.Content.ReadAsStringAsync().ContinueWith((resultTask) =>
                         {
-                            var text = resultTask.Result;
-                            if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs))
+                            string text = resultTask.Result;
+                            if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs, cancellationToken))
+                            {
                                 return;
+                            }
+
                             try
                             {
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                if (packageObject.StatusCode == 2000)
+                                {
+                                    tcs.SetResult(packageObject.Body);
+                                }
+                                else
+                                {
+                                    tcs.SetException(new Exceptions.StatusCodeException(packageObject.StatusCode, packageObject.Notification));
+                                }
                             }
                             catch (Exception deserializeException)
                             {
@@ -216,30 +261,47 @@ namespace Maydear
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>();
             if (headers != null && headers.Count > 0)
             {
-                foreach (var item in headers)
+                foreach (KeyValuePair<string, string> item in headers)
                 {
                     if (client.DefaultRequestHeaders.Contains(item.Key))
+                    {
                         client.DefaultRequestHeaders.Remove(item.Key);
+                    }
+
                     client.DefaultRequestHeaders.Add(item.Key, item.Value);
                 }
             }
             client.PutAsync(requestUri, content).ContinueWith((requestTask) =>
             {
-                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs))
+                if (TaskHelper.HandleFaultsAndCancelation(requestTask, tcs, cancellationToken))
+                {
                     return;
+                }
+
                 try
                 {
-                    var result = requestTask.Result;
+                    HttpResponseMessage result = requestTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
                         result.Content.ReadAsStringAsync().ContinueWith((resultTask) =>
                         {
                             try
                             {
-                                var text = resultTask.Result;
-                                if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs))
+                                string text = resultTask.Result;
+                                if (TaskHelper.HandleFaultsAndCancelation(resultTask, tcs, cancellationToken))
+                                {
                                     return;
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                }
+
+                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                if (packageObject.StatusCode == 2000)
+                                {
+                                    tcs.SetResult(packageObject.Body);
+                                }
+                                else
+                                {
+                                    tcs.SetException(new Exceptions.StatusCodeException(packageObject.StatusCode, packageObject.Notification));
+                                }
                             }
                             catch (Exception deserializeException)
                             {

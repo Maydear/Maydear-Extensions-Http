@@ -13,7 +13,7 @@ namespace Maydear.Extension.Http
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            for (var i = 0; i < RetryCount; i++)
+            for (int i = 0; i < RetryCount; i++)
             {
                 try
                 {

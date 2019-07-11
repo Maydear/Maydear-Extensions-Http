@@ -72,7 +72,9 @@ namespace System.Net.Http
         internal static IEnumerable<KeyValuePair<string, string>> Deserialize(object obj)
         {
             if (obj == null)
+            {
                 return Enumerable.Empty<KeyValuePair<string, string>>();
+            }
 
             string jsonStr = JsonConvert.SerializeObject(obj);
 
