@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3FDBFCEF-DBCC-4D02-AD27-042C10C647B3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CHANGELOG = CHANGELOG
+		LICENSE-2.0.txt = LICENSE-2.0.txt
+		NuGet.config = NuGet.config
+		nuget.exe = nuget.exe
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DF84101D-00A2-4527-A679-AAE498BE5BD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maydear.Extension.Http", "src\Maydear.Extension.Http\Maydear.Extension.Http.csproj", "{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {326DD4AC-8DFD-458C-A804-016D74A68D9B}
+	EndGlobalSection
+EndGlobal
