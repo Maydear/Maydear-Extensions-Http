@@ -9,7 +9,7 @@ namespace System.Net.Http
     /// <summary>
     /// HttpContent扩展
     /// </summary>
-    internal static class HttpContentExtension
+    public static class HttpContentExtension
     {
         /// <summary>
         /// 转换为格式json对象HttpContent，mime：text/plain
