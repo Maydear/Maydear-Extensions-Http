@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DF84101D-00A2-4527-A679-AAE498BE5BD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maydear.Extension.Http", "src\Maydear.Extension.Http\Maydear.Extension.Http.csproj", "{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maydear.Extension.Http", "src\Maydear.Extension.Http\Maydear.Extension.Http.csproj", "{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionHttpSamples", "samples\ExtensionHttpSamples\ExtensionHttpSamples.csproj", "{5C3546F9-353C-48FC-849C-C2F88883B0E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +31,16 @@ Global
 		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B44B2CA-4722-49FB-885A-3D5BFB0E7C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3546F9-353C-48FC-849C-C2F88883B0E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3546F9-353C-48FC-849C-C2F88883B0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3546F9-353C-48FC-849C-C2F88883B0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3546F9-353C-48FC-849C-C2F88883B0E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5C3546F9-353C-48FC-849C-C2F88883B0E6} = {DF84101D-00A2-4527-A679-AAE498BE5BD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {326DD4AC-8DFD-458C-A804-016D74A68D9B}
