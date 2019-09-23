@@ -44,28 +44,18 @@ namespace Microsoft.Extensions.DependencyInjection
             registry.Add("long", longTimeout);
 
             return services.AddHttpClient(name, configureClient)
-              // Build a totally custom policy using any criteria
               .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10)))
-
-              // Use a specific named policy from the registry. Simplest way, policy is cached for the
-              // lifetime of the handler.
               .AddPolicyHandlerFromRegistry("regular")
-
-              // Run some code to select a policy based on the request
               .AddPolicyHandler((request) =>
               {
                   return request.Method == HttpMethod.Get ? timeout : longTimeout;
               })
-
-              // Run some code to select a policy from the registry based on the request
               .AddPolicyHandlerFromRegistry((reg, request) =>
               {
                   return request.Method == HttpMethod.Get ?
                       reg.Get<IAsyncPolicy<HttpResponseMessage>>("regular") :
                       reg.Get<IAsyncPolicy<HttpResponseMessage>>("long");
               })
-
-              // Build a policy that will handle exceptions, 408s, and 500s from the remote server
               .AddTransientHttpErrorPolicy(p => p.RetryAsync())
               .AddHttpMessageHandler(() => new RetryHandler());
         }

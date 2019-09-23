@@ -26,7 +26,7 @@ namespace Maydear.Extension.Http
                 catch (HttpRequestException)
                 {
                     // Retry
-                    await Task.Delay(TimeSpan.FromMilliseconds(50));
+                    await Task.Delay(TimeSpan.FromMilliseconds(50 * (i + 1)));
                 }
             }
 
