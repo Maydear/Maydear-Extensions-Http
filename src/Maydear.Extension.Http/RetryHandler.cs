@@ -29,7 +29,7 @@ namespace Maydear.Extension.Http
                 }
                 catch (HttpRequestException hre) when (i == RetryCount - 1)
                 {
-                    logger.LogError(hre, $"HttpRequestException Retry “{i}”：{request.RequestUri.ToString()}");
+                    logger.LogWarning(hre, $"HttpRequestException Retry “{i}”：{request.RequestUri.ToString()}");
                     throw;
                 }
                 catch (HttpRequestException hre)
