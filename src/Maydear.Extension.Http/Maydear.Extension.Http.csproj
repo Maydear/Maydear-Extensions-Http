@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,14 +13,14 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Title> 针对HttpClient常用扩展方法 </Title>
         <Description>针对HttpClient常用扩展方法</Description>
-        <Version>2.2.1</Version>
+        <Version>2.3.100</Version>
         <AssemblyName>Maydear.Extension.Http</AssemblyName>
         <NeutralLanguage>zh-CN</NeutralLanguage>
         <Language>zh-CN</Language>
         <PackageTags>Maydear.Extension.Http Maydear.Extension Maydear</PackageTags>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Maydear" Version="2.2.1" />
+        <PackageReference Include="Maydear" Version="2.3.100" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />

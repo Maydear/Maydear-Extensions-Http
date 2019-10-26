@@ -1,5 +1,6 @@
 using Maydear.Extension.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
 using System;
@@ -37,14 +38,14 @@ namespace Microsoft.Extensions.DependencyInjection
             }
             IPolicyRegistry<string> registry = services.AddPolicyRegistry();
 
-            Polly.Timeout.TimeoutPolicy<HttpResponseMessage> timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
-            Polly.Timeout.TimeoutPolicy<HttpResponseMessage> longTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30));
+            Polly.Timeout.TimeoutPolicy<HttpResponseMessage> timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(20));
+            Polly.Timeout.TimeoutPolicy<HttpResponseMessage> longTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
 
             registry.Add("regular", timeout);
             registry.Add("long", longTimeout);
 
             return services.AddHttpClient(name, configureClient)
-              .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10)))
+              .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60)))
               .AddPolicyHandlerFromRegistry("regular")
               .AddPolicyHandler((request) =>
               {
@@ -57,7 +58,7 @@ namespace Microsoft.Extensions.DependencyInjection
                       reg.Get<IAsyncPolicy<HttpResponseMessage>>("long");
               })
               .AddTransientHttpErrorPolicy(p => p.RetryAsync())
-              .AddHttpMessageHandler(() => new RetryHandler());
+              .AddHttpMessageHandler(() => new RetryHandler(services.BuildServiceProvider().GetRequiredService<ILoggerFactory>()));
         }
     }
 }

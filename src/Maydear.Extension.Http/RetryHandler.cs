@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,6 +12,13 @@ namespace Maydear.Extension.Http
     {
         public int RetryCount { get; set; } = 5;
 
+        private readonly ILogger logger;
+
+        public RetryHandler(ILoggerFactory loggerFactory)
+        {
+            logger = loggerFactory.CreateLogger<RetryHandler>();
+        }
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             for (int i = 0; i < RetryCount; i++)
@@ -19,18 +27,19 @@ namespace Maydear.Extension.Http
                 {
                     return await base.SendAsync(request, cancellationToken);
                 }
-                catch (HttpRequestException) when (i == RetryCount - 1)
+                catch (HttpRequestException hre) when (i == RetryCount - 1)
                 {
+                    logger.LogError(hre, $"HttpRequestException Retry “{i}”：{request.RequestUri.ToString()}");
                     throw;
                 }
-                catch (HttpRequestException)
+                catch (HttpRequestException hre)
                 {
                     // Retry
+                    logger.LogWarning(hre, $"HttpRequestException Retry Delay “{50 * (i + 1)}”");
                     await Task.Delay(TimeSpan.FromMilliseconds(50 * (i + 1)));
                 }
             }
 
-            // Unreachable.
             throw null;
         }
     }
