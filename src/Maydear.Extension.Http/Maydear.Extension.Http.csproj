@@ -30,7 +30,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Maydear" Version="2.3.100" />
+        <PackageReference Include="Maydear" Version="2.3.101" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
@@ -41,7 +41,7 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="..\..\LICENSE-2.0.txt" Pack="true" Visible="false" PackagePath="" />
-        <None Include="..\..\icon.png" Pack="true" Visible="false" PackagePath=""/>
+        <None Include="..\..\icon.png" Pack="true" Visible="false" PackagePath="" />
     </ItemGroup>
 
 </Project>
