@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageProjectUrl>https://github.com/Maydear/Maydear-Extensions-Http</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Maydear/Maydear-Extensions-Http.git</RepositoryUrl>
+        <PackageIcon>icon.png</PackageIcon>
         <PackageLicenseFile>LICENSE-2.0.txt</PackageLicenseFile>
         <RepositoryType>git</RepositoryType>
         <Copyright>Maydear Team (admin@maydear.com)</Copyright>
@@ -13,12 +14,21 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Title> 针对HttpClient常用扩展方法 </Title>
         <Description>针对HttpClient常用扩展方法</Description>
-        <Version>2.3.100</Version>
+        <Version>2.3.101</Version>
         <AssemblyName>Maydear.Extension.Http</AssemblyName>
         <NeutralLanguage>zh-CN</NeutralLanguage>
         <Language>zh-CN</Language>
         <PackageTags>Maydear.Extension.Http Maydear.Extension Maydear</PackageTags>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)'=='Release|netstandard2.0'">
+        <DocumentationFile>bin\Release\$(TargetFramework)\Maydear.Extension.Http.xml</DocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DocumentationFile>bin\Release\$(TargetFramework)\Maydear.Extension.Http.xml</DocumentationFile>
+        <OutputPath>..\..\publish\</OutputPath>
+    </PropertyGroup>
+    
     <ItemGroup>
         <PackageReference Include="Maydear" Version="2.3.100" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
@@ -31,13 +41,7 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="..\..\LICENSE-2.0.txt" Pack="true" Visible="false" PackagePath="" />
+        <None Include="..\..\icon.png" Pack="true" Visible="false" PackagePath=""/>
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)'=='Release|netstandard2.0'">
-        <DocumentationFile>bin\Release\$(TargetFramework)\Maydear.Extension.Http.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <DocumentationFile>bin\Release\$(TargetFramework)\Maydear.Extension.Http.xml</DocumentationFile>
-        <OutputPath>..\..\publish\</OutputPath>
-    </PropertyGroup>
 </Project>
