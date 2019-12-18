@@ -1,10 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageProjectUrl>https://github.com/Maydear/Maydear-Extensions-Http</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Maydear/Maydear-Extensions-Http.git</RepositoryUrl>
-        <PackageIconUrl>http://oss.lvcoco.com/static/logo.png</PackageIconUrl>
         <PackageIcon>icon.png</PackageIcon>
         <Icon>icon.png</Icon>
         <PackageLicenseFile>LICENSE-2.0.txt</PackageLicenseFile>
