@@ -6,6 +6,7 @@
         <RepositoryUrl>https://github.com/Maydear/Maydear-Extensions-Http.git</RepositoryUrl>
         <PackageIconUrl>http://oss.lvcoco.com/static/logo.png</PackageIconUrl>
         <PackageIcon>icon.png</PackageIcon>
+        <Icon>icon.png</Icon>
         <PackageLicenseFile>LICENSE-2.0.txt</PackageLicenseFile>
         <RepositoryType>git</RepositoryType>
         <Copyright>Maydear Team (admin@maydear.com)</Copyright>
@@ -31,7 +32,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Maydear" Version="2.3.101" />
+        <PackageReference Include="Maydear" Version="2.3.104" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
