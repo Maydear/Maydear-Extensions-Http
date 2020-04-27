@@ -38,14 +38,13 @@ namespace ExtensionHttpSamples
 
         public static void Configure(IServiceCollection services)
         {
-            services.AddHttpClient("github", c =>
+            services.AddHttpService<GitHubService>("github", c =>
             {
                 c.BaseAddress = new Uri("https://api.github.com/");
 
                 c.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
                 c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-Sample");
-            })
-            .AddTypedClient<GitHubService>();
+            });
         }
 
     }
