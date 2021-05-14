@@ -39,7 +39,15 @@ namespace System.Net.Http
         /// <returns></returns>
         public static HttpContent ToFormUrlEncodedContent<T>(this T data) where T : class
         {
-            return new FormUrlEncodedContent(JsonKeyValuePair.Deserialize(data));
+            if(data is string)
+            {
+                return new FormUrlEncodedContent(JsonKeyValuePair.Deserialize(data.ToString()));
+            }
+            else
+            {
+                return new FormUrlEncodedContent(JsonKeyValuePair.BuidKeyValues(data));
+            }
+        
         }
     }
 }
