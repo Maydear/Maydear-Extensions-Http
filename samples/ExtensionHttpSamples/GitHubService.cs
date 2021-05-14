@@ -1,9 +1,9 @@
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace ExtensionHttpSamples
 {
@@ -16,9 +16,9 @@ namespace ExtensionHttpSamples
 
         public HttpClient HttpClient { get; }
 
-        public Task<JObject> GetJson()
+        public Task<Object> GetJson()
         {
-            return HttpClient.GetAsync<JObject>("/");
+            return HttpClient.GetAsync<Object>("/");
         }
     }
 }

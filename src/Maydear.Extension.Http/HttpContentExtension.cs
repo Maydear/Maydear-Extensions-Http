@@ -1,7 +1,7 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Xml.Linq;
 
 namespace System.Net.Http
@@ -18,7 +18,8 @@ namespace System.Net.Http
         /// <returns></returns>
         public static HttpContent ToStringContentForTextPlain<T>(this T data) where T : class
         {
-            return new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "text/plain");
+            
+            return new StringContent(JsonSerializer.Serialize<T>(data), Encoding.UTF8, "text/plain");
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace System.Net.Http
         /// <returns></returns>
         public static HttpContent ToStringContentForJson<T>(this T data) where T : class
         {
-            return new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+            return new StringContent(JsonSerializer.Serialize<T>(data), Encoding.UTF8, "application/json");
         }
 
         /// <summary>

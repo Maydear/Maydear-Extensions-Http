@@ -1,10 +1,12 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Reflection;
 
 namespace System.Net.Http
 {
@@ -20,48 +22,8 @@ namespace System.Net.Http
         /// <returns>返回键值对集合</returns>
         internal static IEnumerable<KeyValuePair<string, string>> Deserialize(string jsonString)
         {
-            JsonReader reader = new JsonTextReader(new StringReader(jsonString));
-            List<KeyValuePair<string, string>> requestKeyValue = new List<KeyValuePair<string, string>>();
-
-            NameValueCollection jsonKeyValue = new NameValueCollection();
-            while (reader.Read())
-            {
-
-                if (reader.Depth > 0)
-                {
-                    if (reader.TokenType != JsonToken.PropertyName
-                        && reader.TokenType != JsonToken.Comment
-                        && reader.TokenType != JsonToken.StartArray
-                        && reader.TokenType != JsonToken.EndArray
-                        && reader.TokenType != JsonToken.StartConstructor
-                        && reader.TokenType != JsonToken.StartObject
-                        && reader.TokenType != JsonToken.EndConstructor
-                        && reader.TokenType != JsonToken.EndObject
-                        && reader.TokenType != JsonToken.Date
-                        && reader.Value != null
-                        )
-                    {
-                        string path = reader.Path;
-                        jsonKeyValue.Add(path, reader.Value.ToString());
-                    }
-
-                    if (reader.TokenType == JsonToken.Date)
-                    {
-                        string path = reader.Path;
-                        jsonKeyValue.Add(path, ((DateTime)reader.Value).ToString("yyyy-MM-ddTHH:mm:ss.fffffff"));
-                    }
-
-                }
-            }
-            foreach (string propertyNameKey in jsonKeyValue.AllKeys)
-            {
-                foreach (string propertyNameValue in jsonKeyValue.GetValues(propertyNameKey))
-                {
-                    requestKeyValue.Add(new KeyValuePair<string, string>(propertyNameKey, propertyNameValue));
-                }
-            }
-
-            return requestKeyValue;
+            object obj = JsonSerializer.Deserialize<object>(jsonString);
+            return BuidKeyValues(obj);
         }
 
         /// <summary>
@@ -69,16 +31,46 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="obj">待序列化的对象</param>
         /// <returns>返回键值对集合</returns>
-        internal static IEnumerable<KeyValuePair<string, string>> Deserialize(object obj)
+        internal static IEnumerable<KeyValuePair<string, string>> BuidKeyValues(object obj)
         {
             if (obj == null)
             {
                 return Enumerable.Empty<KeyValuePair<string, string>>();
             }
+            List<KeyValuePair<string, string>> requestKeyValue = new List<KeyValuePair<string, string>>();
 
-            string jsonStr = JsonConvert.SerializeObject(obj);
+            foreach (PropertyInfo item in obj.GetType().GetProperties())
+            {
+                var propertyName= item.PropertyType.Name;
+                var IsGenericType = item.PropertyType.IsGenericType;
+                var isList = item.PropertyType.GetInterface("IEnumerable", false);
+                if (IsGenericType && isList != null)
+                {
+                    var listVal = item.GetValue(obj) as IEnumerable<object>;
+                    if (listVal == null) continue;
+                    foreach (var aa in listVal)
+                    {
+                        var dtype = aa.GetType();
+                        foreach (var bb in dtype.GetProperties())
+                        {
+                            var dtlName = bb.Name.ToLower();
+                            var dtlType = bb.PropertyType.Name;
+                            var oldValue = bb.GetValue(aa);
+                            if (dtlType == typeof(decimal).Name)
+                            {
+                                int dit = 4;
+                                if (dtlName.Contains("price") || dtlName.Contains("amount"))
+                                    dit = 2;
+                                bb.SetValue(aa, Math.Round(Convert.ToDecimal(oldValue), dit, MidpointRounding.AwayFromZero));
+                            }
+                            Console.WriteLine($"子级属性名称：{dtlName}，类型：{dtlType}，值：{oldValue}");
+                        }
+                    }
+                }
+            }
 
-            return Deserialize(jsonStr);
+
+            return requestKeyValue;
         }
     }
 }

@@ -1,9 +1,9 @@
 using Maydear.Utilities;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -60,7 +60,7 @@ namespace Maydear
 
                             try
                             {
-                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                IPackageObject<T> packageObject =JsonSerializer.Deserialize<IPackageObject<T>>(text);
                                 if (packageObject.StatusCode == 2000)
                                 {
                                     tcs.SetResult(packageObject.Body);
@@ -136,7 +136,7 @@ namespace Maydear
 
                             try
                             {
-                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                IPackageObject<T> packageObject =JsonSerializer.Deserialize<IPackageObject<T>>(text);
                                 if (packageObject.StatusCode == 2000)
                                 {
                                     tcs.SetResult(packageObject.Body);
@@ -215,7 +215,7 @@ namespace Maydear
 
                             try
                             {
-                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                IPackageObject<T> packageObject =JsonSerializer.Deserialize<IPackageObject<T>>(text);
                                 if (packageObject.StatusCode == 2000)
                                 {
                                     tcs.SetResult(packageObject.Body);
@@ -293,7 +293,7 @@ namespace Maydear
                                     return;
                                 }
 
-                                IPackageObject<T> packageObject = JsonConvert.DeserializeObject<IPackageObject<T>>(text);
+                                IPackageObject<T> packageObject =JsonSerializer.Deserialize<IPackageObject<T>>(text);
                                 if (packageObject.StatusCode == 2000)
                                 {
                                     tcs.SetResult(packageObject.Body);

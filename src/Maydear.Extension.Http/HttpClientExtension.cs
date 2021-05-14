@@ -1,8 +1,8 @@
 using Maydear.Utilities;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -59,7 +59,7 @@ namespace System.Net.Http
 
                             try
                             {
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                tcs.SetResult(JsonSerializer.Deserialize<T>(text));
                             }
                             catch (Exception deserializeException)
                             {
@@ -127,7 +127,7 @@ namespace System.Net.Http
 
                             try
                             {
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                tcs.SetResult(JsonSerializer.Deserialize<T>(text));
                             }
                             catch (Exception deserializeException)
                             {
@@ -198,7 +198,7 @@ namespace System.Net.Http
 
                             try
                             {
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                tcs.SetResult(JsonSerializer.Deserialize<T>(text));
                             }
                             catch (Exception deserializeException)
                             {
@@ -268,7 +268,7 @@ namespace System.Net.Http
                                     return;
                                 }
 
-                                tcs.SetResult(JsonConvert.DeserializeObject<T>(text));
+                                tcs.SetResult(JsonSerializer.Deserialize<T>(text));
                             }
                             catch (Exception deserializeException)
                             {
