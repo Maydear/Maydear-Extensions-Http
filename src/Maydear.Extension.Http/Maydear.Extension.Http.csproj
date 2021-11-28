@@ -15,7 +15,7 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Title> 针对HttpClient常用扩展方法 </Title>
         <Description>针对HttpClient常用扩展方法</Description>
-        <Version>3.1.210</Version>
+        <Version>6.0.0</Version>
         <AssemblyName>Maydear.Extension.Http</AssemblyName>
         <NeutralLanguage>zh-CN</NeutralLanguage>
         <Language>zh-CN</Language>
