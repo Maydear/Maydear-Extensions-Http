@@ -15,7 +15,7 @@ namespace ExtensionHttpSamples
             serviceCollection.AddLogging(b =>
             {
                 b.AddFilter((category, level) => true);
-                b.AddConsole(c => c.IncludeScopes = true);
+                b.AddConsole();
             });
 
             Configure(serviceCollection);
